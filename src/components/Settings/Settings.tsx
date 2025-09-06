@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Bot, Zap, Shield, Bell, User, Globe, Palette, Database, Key, Save, RefreshCw } from 'lucide-react';
+import { ArrowLeft, Bot, Shield, Bell, User, Palette, Key, Save, RefreshCw } from 'lucide-react';
 
 interface SettingsProps {
   onBack: () => void;
@@ -50,7 +50,7 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
     { id: 'account', label: 'Compte', icon: User },
   ];
 
-  const updateSetting = (section: string, key: string, value: any) => {
+  const updateSetting = (section: string, key: string, value: string | boolean | number) => {
     setSettings(prev => ({
       ...prev,
       [section]: {
@@ -75,7 +75,7 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
       
       setSaveStatus('success');
       setTimeout(() => setSaveStatus('idle'), 3000);
-    } catch (error) {
+    } catch {
       setSaveStatus('error');
       setTimeout(() => setSaveStatus('idle'), 3000);
     } finally {
@@ -96,7 +96,7 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
       } else {
         alert('❌ Clé API invalide. Vérifiez votre clé.');
       }
-    } catch (error) {
+    } catch {
       alert('❌ Erreur de connexion à OpenAI. Vérifiez votre clé et votre connexion internet.');
     }
   };
@@ -112,7 +112,9 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
         autoOptimization: true,
         keywordSuggestions: true,
         industrySpecific: true,
-        apiKey: ''
+        apiKey: '',
+        voiceRecognition: true,
+        voiceSynthesis: true
       },
       notifications: {
         analysisComplete: true,
@@ -608,7 +610,7 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* Sidebar */}
         <div className="lg:col-span-1">
-          <div className="bg-white/70 backdrop-blur-sm rounded-2xl border border-gray-200/30 p-4 sticky top-8">
+          <div className="bg-white/70 backdrop-blur-sm rounded-2xl border border-gray-200/30 p-4 sticky top-8 h-full">
             <nav className="space-y-2">
               {sections.map((section) => {
                 const Icon = section.icon;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { DivideIcon as LucideIcon } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
 
 interface MetricCardProps {
   title: string;
@@ -17,7 +17,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   gradient 
 }) => {
   return (
-    <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/30 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+    <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/30 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
       <div className="flex items-center justify-between mb-4">
         <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${gradient} group-hover:scale-110 transition-transform duration-200 flex items-center justify-center`}>
           <Icon className="w-6 h-6 text-white" />

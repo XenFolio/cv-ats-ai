@@ -4,8 +4,6 @@ import { useAuth } from '../Auth/AuthProvider';
 import { useSupabase } from '../../hooks/useSupabase';
 import { MetricCard } from './MetricCard';
 import { RecentActivity } from './RecentActivity';
-import { PerformanceChart } from './PerformanceChart';
-
 interface DashboardProps {
   onNavigate?: (tab: string) => void;
 }
@@ -43,7 +41,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       : 0;
 
     // Calculer les tendances seulement s'il y a assez de données (au moins 5 analyses)
-    let trends = {
+    let trends: {
+      totalAnalyzedTrend: string | null;
+      averageScoreTrend: string | null;
+      qualifiedCandidatesTrend: string | null;
+      matchRateTrend: string | null;
+    } = {
       totalAnalyzedTrend: null,
       averageScoreTrend: null,
       qualifiedCandidatesTrend: null,
@@ -56,10 +59,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
       const sixtyDaysAgo = new Date(now.getTime() - 60 * 24 * 60 * 60 * 1000);
 
-      const recentActivities = analysisActivities.filter(a => 
+      const recentActivities = analysisActivities.filter(a =>
         new Date(a.created_at) >= thirtyDaysAgo
       );
-      const previousActivities = analysisActivities.filter(a => 
+      const previousActivities = analysisActivities.filter(a =>
         new Date(a.created_at) >= sixtyDaysAgo && new Date(a.created_at) < thirtyDaysAgo
       );
 
@@ -75,7 +78,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
         trends = {
           totalAnalyzedTrend: recentActivities.length > previousActivities.length ? '+' : '-',
-          averageScoreTrend: recentAvgScore > previousAvgScore ? 
+          averageScoreTrend: recentAvgScore > previousAvgScore ?
             `+${Math.round(((recentAvgScore - previousAvgScore) / previousAvgScore) * 100)}%` :
             `-${Math.round(((previousAvgScore - recentAvgScore) / previousAvgScore) * 100)}%`,
           qualifiedCandidatesTrend: recentQualified > previousQualified ? '+' : '-',
@@ -150,15 +153,15 @@ export const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
         {metricCards.map((metric, index) => (
           <MetricCard key={index} {...metric} />
         ))}
       </div>
 
       {/* Charts and Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div>
+      <div className="grid grid-cols-1 lg:grid-cols-1 gap-8">
+        <div className="flex justify-center">
           <RecentActivity />
         </div>
       </div>

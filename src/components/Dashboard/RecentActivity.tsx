@@ -41,7 +41,7 @@ export const RecentActivity: React.FC = () => {
   };
 
   return (
-    <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/30">
+    <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/30 mx-auto w-full shadow-sm">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-semibold text-gray-900">Activité Récente</h3>
         <div className="flex items-center space-x-2">
@@ -69,17 +69,12 @@ export const RecentActivity: React.FC = () => {
         </div>
       ) : activities.length === 0 ? (
         <div className="text-center py-8">
-          <Clock className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h4 className="font-semibold text-gray-900 mb-2">Aucune activité pour le moment</h4>
+          <Clock className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+          <h4 className="font-semibold text-gray-700 mb-2">Aucune activité pour le moment</h4>
           <p className="text-sm text-gray-600 mb-4">
             Commencez par analyser un CV ou créer un nouveau document pour voir vos activités ici
           </p>
-          <button 
-            onClick={() => window.location.hash = '#analyze'}
-            className="bg-gradient-to-r from-violet-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-violet-700 hover:to-pink-700 transition-all duration-200 hover:scale-105"
-          >
-            Analyser un CV
-          </button>
+          
         </div>
       ) : (
         <div className="space-y-4">
@@ -122,8 +117,8 @@ export const RecentActivity: React.FC = () => {
       )}
       
       {/* Footer */}
-      <div className="mt-6 pt-4 border-t border-gray-200/30">
-        <button className="w-full text-center text-sm text-violet-600 hover:text-violet-700 font-medium transition-colors">
+      <div className="mt-6 pt-4 border-t border-gray-200/30 flex justify-center">
+        <button className="bg-gradient-to-r from-violet-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-violet-700 hover:to-pink-700 transition-all duration-200 hover:scale-105 shadow-sm">
           Voir toute l'activité
         </button>
       </div>

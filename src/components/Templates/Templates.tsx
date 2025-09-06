@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Download, Eye, Star, FileText, Award, TrendingUp, Users, CheckCircle, Filter, Search, Sparkles } from 'lucide-react';
+import { Download, Eye, Star, FileText, Award, TrendingUp, Users, Search, Sparkles } from 'lucide-react';
 
 interface Template {
   id: string;
@@ -21,7 +21,7 @@ export const Templates: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('popular');
 
-  const templates: Template[] = [
+  const templates: Template[] = React.useMemo(() => [
     {
       id: '1',
       name: 'CV Tech Senior Pro',
@@ -134,7 +134,7 @@ export const Templates: React.FC = () => {
       isPremium: true,
       industry: 'Conseil'
     }
-  ];
+  ], []);
 
   // Générer les catégories dynamiquement depuis les templates Supabase
   const categories = React.useMemo(() => {
@@ -168,7 +168,7 @@ export const Templates: React.FC = () => {
       }
     });
 
-  const handleDownloadFormat = (template: Template, format: 'word' | 'html' | 'txt') => {
+  const handleDownloadFormat = (template: Template, format: 'word' | 'html' | 'txt' | 'pdf') => {
     try {
       let content = '';
       let filename = '';
@@ -427,9 +427,6 @@ Français (Natif) • Anglais (Courant) • [Autre langue]
     }
   };
 
-  const handleDownload = (template: Template) => {
-    handleDownloadFormat(template, 'word');
-  };
 
   const handlePreview = (template: Template) => {
     // In a real app, this would open a preview modal

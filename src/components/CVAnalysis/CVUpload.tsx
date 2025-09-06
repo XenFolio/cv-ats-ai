@@ -186,24 +186,6 @@ export const CVUpload: React.FC<CVUploadProps> = ({ onFileUpload }) => {
         )}
       </div>
 
-      {/* File Format Icons */}
-      {uploadStatus === 'idle' && (
-        <div className="grid grid-cols-4 gap-4 mt-6">
-          {[
-            { label: 'PDF', color: 'from-red-500 to-red-600' },
-            { label: 'DOC', color: 'from-blue-500 to-blue-600' },
-            { label: 'DOCX', color: 'from-blue-500 to-indigo-600' },
-            { label: 'TXT', color: 'from-gray-500 to-gray-600' }
-          ].map((format) => (
-            <div key={format.label} className="text-center">
-              <div className={`w-12 h-12 bg-gradient-to-br ${format.color} rounded-xl flex items-center justify-center mx-auto mb-2 hover:scale-110 transition-transform duration-200`}>
-                <FileText className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-xs text-gray-600 font-medium">{format.label}</span>
-            </div>
-          ))}
-        </div>
-      )}
       
       {/* Display error if any */}
       {error && (
@@ -216,10 +198,6 @@ export const CVUpload: React.FC<CVUploadProps> = ({ onFileUpload }) => {
         </div>
       )}
         <div className="mt-6">
-          <div className="text-sm text-gray-500 mb-4">
-            <p>Formats acceptés: PDF, DOC, DOCX, TXT</p>
-            <p>Taille maximale: 10MB</p>
-          </div>
           
           {/* API Key Warning */}
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start space-x-3">

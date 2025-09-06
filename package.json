@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.2",
+    "@types/file-saver": "^2.0.7",
+    "docx": "^9.5.1",
+    "file-saver": "^2.0.5",
     "lucide-react": "^0.344.0",
     "mammoth": "^1.10.0",
     "pdf-parse": "^1.1.1",
